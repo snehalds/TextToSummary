@@ -1,16 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { FileProvider } from './context/FileContext';
+import Header from './components/Header';
+import Tabs from './components/Tabs';
+import DefaultSummarization from './pages/DefaultSummarization';
+import CustomSummarization from './pages/CustomSummarization';
+import FileUpload from './components/FileUpload';
+import './index.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const productId = '18'; // Replace with actual productId
 
   return (
-   <>
-   <div className="bg-red-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe vel, obcaecati non ut voluptates quod consequuntur adipisci modi magnam id? Cum eligendi perferendis corrupti quisquam porro reprehenderit eius repudiandae cumque!</div>
-   </>
-  )
+    <Router>
+      <FileProvider>
+        <div className="min-h-screen bg-gray-50">
+          <Header />
+          <div className="container mx-auto p-6">
+            {/* Global FileUpload Component */}
+            <FileUpload productId={productId} />
+
+            {/* Tabs for switching between pages */}
+            <Tabs />
+            
+            {/* Routes for both types of Summarization */}
+            <Routes>
+              <Route path="/" element={<DefaultSummarization />} />
+              <Route path="/custom" element={<CustomSummarization />} />
+            </Routes>
+          </div>
+        </div>
+      </FileProvider>
+    </Router>
+  );
 }
 
-export default App
+export default App;
