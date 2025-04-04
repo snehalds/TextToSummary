@@ -14,7 +14,6 @@ import React, { useState } from 'react';
 import { FaFileUpload } from 'react-icons/fa';
 import { CgAdd } from 'react-icons/cg';
 import { useFile } from '../context/FileContext';
-import { getDefaultSummary } from '../api/summaryApi';
 
 export default function FileUpload({ productId }: { productId: string }) {
   const { setFile, file } = useFile();
